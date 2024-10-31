@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, {
   json,
   urlencoded,
@@ -10,6 +11,7 @@ import { RegisterRoutes } from "../build/routes";
 import { ValidateError } from "tsoa";
 
 const app = express();
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 app.use(urlencoded({ extended: true }));
 app.use(json());

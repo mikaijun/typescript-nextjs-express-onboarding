@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Flex } from "@chakra-ui/react";
+import { Users } from "../../../../schema/Users";
 import { FieldInput } from "@/components/template/fieldInput";
 
 const REQUIRED_MESSAGE = "必須項目です";
@@ -45,7 +46,8 @@ export const Home = () => {
   });
 
   const onSubmit = async (data: UseFormProps) => {
-    alert(JSON.stringify(data));
+    const users = new Users({ baseUrl: "http://localhost:8080" });
+    await users.createUser({ ...data });
   };
 
   return (
