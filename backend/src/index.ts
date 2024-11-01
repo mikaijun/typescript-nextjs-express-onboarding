@@ -21,6 +21,8 @@ app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
   res.send(swaggerUi.generateHTML(swaggerDocument));
 });
 
+RegisterRoutes(app);
+
 app.use((err: unknown, _: ExRequest, res: ExResponse, next: NextFunction) => {
   if (err instanceof ValidateError) {
     return res.status(422).json({
@@ -35,8 +37,6 @@ app.use((err: unknown, _: ExRequest, res: ExResponse, next: NextFunction) => {
   }
   next();
 });
-
-RegisterRoutes(app);
 
 const port = process.env.PORT || 8080;
 app.listen(port);
